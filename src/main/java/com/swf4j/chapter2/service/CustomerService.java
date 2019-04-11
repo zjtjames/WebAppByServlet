@@ -15,7 +15,7 @@ public class CustomerService {
     /**
      * 获取客户列表
      */
-    public List<Customer> getCustomerList(String keyword) {
+    public List<Customer> getCustomerList() {
         //todo
         return null;
     }
