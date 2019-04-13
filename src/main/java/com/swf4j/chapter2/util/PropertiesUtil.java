@@ -40,6 +40,7 @@ public final class PropertiesUtil {
      * @param key
      * @return
      */
+    // 因为是工具类 所以方法是静态的
     public static String getProperty(String key) {
         String value = props.getProperty(key.trim());
         if (StringUtils.isBlank(value)) {
