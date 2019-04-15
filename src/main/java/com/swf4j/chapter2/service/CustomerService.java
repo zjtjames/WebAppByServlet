@@ -14,11 +14,7 @@ import java.util.Map;
  */
 public class CustomerService {
 
-    //JDBC相关的配置项
-    private static final String DRIVER = PropertiesUtil.getProperty("jdbc.driver");
-    private static final String URL = PropertiesUtil.getProperty("jdbc.url");
-    private static final String USERNAME = PropertiesUtil.getProperty("jdbc.username");
-    private static final String PASSWORD = PropertiesUtil.getProperty("jdbc.password");
+
 
     /**
      * 获取客户列表
