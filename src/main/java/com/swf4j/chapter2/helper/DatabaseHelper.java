@@ -59,6 +59,7 @@ public final class DatabaseHelper {
         Connection conn = CONNECTION_HOLDER.get();
         if (conn == null) {
             try {
+                //从连接池中取一个连接
                 conn = DATA_SOURCE.getConnection();
             } catch (SQLException e) {
                 LOGGER.error("get connection failure", e);
@@ -120,6 +121,23 @@ public final class DatabaseHelper {
             throw new RuntimeException(e);
         }
         return result;
+    }
+
+    /**
+     * 执行更新语句（包括update,insert,delete）
+     * 返回执行后受影响的行数，也就是说，更新了多少条记录
+     */
+    public static int executeUpdate(String sql, Object... params) {
+        int rows = 0;
+        try {
+            Connection conn = getConnection();
+            rows = QUERY_RUNNER.update(conn, sql, params);
+        } catch (SQLException e) {
+            LOGGER.error("execute update failure", e);
+            throw new RuntimeException(e);
+        }
+        return rows;
+
     }
 
 }
