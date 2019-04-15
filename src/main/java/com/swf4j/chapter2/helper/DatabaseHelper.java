@@ -8,6 +8,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
 import org.apache.commons.dbutils.handlers.BeanListHandler;
+import org.apache.commons.dbutils.handlers.MapListHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,6 +16,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 数据库操作助手类
@@ -92,6 +94,7 @@ public final class DatabaseHelper {
     public static <T> T queryEntity(Class<T> entityClass, String sql, Object... params) {
         T entity;
         try {
+
             Connection conn = getConnection();
             entity = QUERY_RUNNER.query(conn, sql, new BeanHandler<T>(entityClass), params);
         } catch (SQLException e) {
@@ -99,6 +102,24 @@ public final class DatabaseHelper {
             throw new RuntimeException(e);
         }
         return entity;
+    }
+
+    /**
+     * 执行查询语句（更为强大的查询方法）
+     * 输入一个sql和动态参数
+     * 返回List对象
+     * Map表示列名与与列值的映射关系
+     */
+    public static List<Map<String, Object>> executeQuery(String sql, Object... params) {
+        List<Map<String,Object>> result;
+        try {
+            Connection conn = getConnection();
+            result = QUERY_RUNNER.query(conn, sql, new MapListHandler(), params);
+        } catch (SQLException e) {
+            LOGGER.error("execute query failure", e);
+            throw new RuntimeException(e);
+        }
+        return result;
     }
 
 }
