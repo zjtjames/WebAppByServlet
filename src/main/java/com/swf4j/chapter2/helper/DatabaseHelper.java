@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -141,6 +142,7 @@ public final class DatabaseHelper {
 
     /**
      * 插入实体
+     * 把sql拼出来 再调用executeUpdate
      */
     public static <T> boolean insertEntity(Class<T> entityClass, Map<String, Object> fieldMap) {
         if (MapUtils.isEmpty(fieldMap)) {
@@ -149,12 +151,28 @@ public final class DatabaseHelper {
         }
 
         String sql = "INSERT INTO" + getTableName(entityClass);
-        return false;
+        StringBuffer columns = new StringBuffer("(");
+        StringBuffer values = new StringBuffer("(");
+        for (String fieldName : fieldMap.keySet()) {
+            columns.append(fieldName).append(", ");
+            values.append("?, ");
+        }
+        columns.replace(columns.lastIndexOf(", "), columns.length(), ")");
+        values.replace(values.lastIndexOf(", "), values.length(), ")");
+        sql = sql + columns + " VALUES " + values;
+        Object[] params = fieldMap.values().toArray();
+        return executeUpdate(sql, params) == 1;
     }
+
+    /**
+     * 更新实体
+     * 把sql拼出来 再调用executeUpdate
+     */
 
     /**
      * "".getClass().getName() java.lang.String
      * "".getClass().getSimpleName()
+     * 此方法叫getTableName是因为entityClass是model的类型，也就是pojo的类型，而pojo的类型与表名相同
      */
     private static String getTableName(Class<?> entityClass) {
         return entityClass.getSimpleName();
