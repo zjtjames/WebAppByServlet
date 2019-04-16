@@ -4,6 +4,7 @@
 package com.swf4j.chapter2.helper;
 
 import com.swf4j.chapter2.util.PropertiesUtil;
+import org.apache.commons.collections.MapUtils;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -14,7 +15,6 @@ import org.slf4j.LoggerFactory;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -137,7 +137,27 @@ public final class DatabaseHelper {
             throw new RuntimeException(e);
         }
         return rows;
+    }
 
+    /**
+     * 插入实体
+     */
+    public static <T> boolean insertEntity(Class<T> entityClass, Map<String, Object> fieldMap) {
+        if (MapUtils.isEmpty(fieldMap)) {
+            LOGGER.error("can't insert entity: fieldMap is empty");
+            return false;
+        }
+
+        String sql = "INSERT INTO" + getTableName(entityClass);
+        return false;
+    }
+
+    /**
+     * "".getClass().getName() java.lang.String
+     * "".getClass().getSimpleName()
+     */
+    private static String getTableName(Class<?> entityClass) {
+        return entityClass.getSimpleName();
     }
 
 }
