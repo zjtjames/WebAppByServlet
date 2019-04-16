@@ -150,7 +150,7 @@ public final class DatabaseHelper {
             return false;
         }
 
-        String sql = "INSERT INTO" + getTableName(entityClass);
+        String sql = "INSERT INTO " + getTableName(entityClass);
         StringBuffer columns = new StringBuffer("(");
         StringBuffer values = new StringBuffer("(");
         for (String fieldName : fieldMap.keySet()) {
@@ -168,6 +168,32 @@ public final class DatabaseHelper {
      * 更新实体
      * 把sql拼出来 再调用executeUpdate
      */
+    public static <T> boolean updateEntity(Class<T> entityClass, long id, Map<String, Object> fieldMap) {
+        if (MapUtils.isEmpty(fieldMap)) {
+            LOGGER.error("can't update entity: fieldMap is empty");
+            return false;
+        }
+
+        String sql = "UPDATE " + entityClass.getSimpleName() + " SET ";
+        StringBuffer columns = new StringBuffer();
+        for (String fieldName : fieldMap.keySet()) {
+            columns.append(fieldName).append("=?, ");
+        }
+        columns.replace(columns.lastIndexOf(", "), columns.length(), " WHERE id=?");
+        sql += columns;
+        List<Object> paramList = new ArrayList<>();
+        paramList.addAll(fieldMap.values());
+        paramList.add(id);
+        Object[] params = paramList.toArray();
+        return executeUpdate(sql, params) == 1;
+    }
+
+    /**
+     * 删除实体
+     * 把sql拼出来 再调用executeUpdate
+     */
+
+
 
     /**
      * "".getClass().getName() java.lang.String
