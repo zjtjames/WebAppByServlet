@@ -192,6 +192,10 @@ public final class DatabaseHelper {
      * 删除实体
      * 把sql拼出来 再调用executeUpdate
      */
+    public static <T> boolean deleteEntity(Class<T> entityClass, long id) {
+        String sql = "DELETE FROM " + getTableName(entityClass) + " WHERE id=?";
+        return executeUpdate(sql, id) == 1;
+    }
 
 
 
