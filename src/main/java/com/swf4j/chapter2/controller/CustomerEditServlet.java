@@ -3,5 +3,8 @@
  */
 package com.swf4j.chapter2.controller;
 
+import javax.servlet.annotation.WebServlet;
+
+@WebServlet("/customer_edit")
 public class CustomerEditServlet {
 }
