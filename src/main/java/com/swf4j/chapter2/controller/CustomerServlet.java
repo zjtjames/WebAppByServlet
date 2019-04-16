@@ -33,6 +33,7 @@ public class CustomerServlet extends HttpServlet {
         List<Customer> customerList = customerService.getCustomerList();
         req.setAttribute("customerList", customerList);
         // 用户无法通过浏览器地址栏直接请求放在内部的JSP，必须通过Servlet程序进行转发（forward）或重定向（redirect）
+        //将List对象放入请求属性中 通过请求对象转发到customer.jsp视图
         req.getRequestDispatcher("/WEB-INF/view/customer.jsp").forward(req, resp);
     }
 }
