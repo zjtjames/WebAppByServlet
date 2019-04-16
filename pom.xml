@@ -68,7 +68,7 @@
             <version>1.1.2</version>
             <scope>compile</scope>
         </dependency>
-        <!-- MySQL -->
+        <!-- MySQL依赖，用于提供JDBC实现 -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
