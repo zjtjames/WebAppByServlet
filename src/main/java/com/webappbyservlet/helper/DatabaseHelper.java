@@ -1,9 +1,9 @@
 /**
  * created by Zheng Jiateng on 2019/4/15.
  */
-package com.swf4j.chapter2.helper;
+package com.webappbyservlet.helper;
 
-import com.swf4j.chapter2.util.PropertiesUtil;
+import com.webappbyservlet.util.PropertiesUtil;
 import org.apache.commons.collections.MapUtils;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.commons.dbutils.QueryRunner;

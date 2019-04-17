@@ -1,11 +1,10 @@
 /**
  * created by Zheng Jiateng on 2019/4/10.
  */
-package com.swf4j.chapter2.service;
+package com.webappbyservlet.service;
 
-import com.swf4j.chapter2.helper.DatabaseHelper;
-import com.swf4j.chapter2.model.Customer;
-import com.swf4j.chapter2.util.PropertiesUtil;
+import com.webappbyservlet.helper.DatabaseHelper;
+import com.webappbyservlet.model.Customer;
 
 import java.util.List;
 import java.util.Map;

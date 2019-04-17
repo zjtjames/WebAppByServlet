@@ -1,6 +1,6 @@
-package com.swf4j.chapter2.service;
+package com.webappbyservlet.service;
 
-import com.swf4j.chapter2.model.Customer;
+import com.webappbyservlet.model.Customer;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.Before;

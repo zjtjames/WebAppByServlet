@@ -1,10 +1,10 @@
 /**
  * created by Zheng Jiateng on 2019/4/10.
  */
-package com.swf4j.chapter2.controller;
+package com.webappbyservlet.controller;
 
-import com.swf4j.chapter2.model.Customer;
-import com.swf4j.chapter2.service.CustomerService;
+import com.webappbyservlet.model.Customer;
+import com.webappbyservlet.service.CustomerService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
